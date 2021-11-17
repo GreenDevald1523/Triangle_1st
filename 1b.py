@@ -1,20 +1,21 @@
-lst = []
-for i in range(50):
-    lst.append(i+1)
-
+lst = input('Введите числа')
+lst = list(lst.split(','))
+lst = [int(x) for x in lst]
 lst.sort(reverse=True)
-first = lst[0]
-second = lst[1]
+maximal = {'1': 0,'2': 0,'3': 0}
 s = 0
 p = 0
-s_max = 0
-maximal = []
 for i in range(2, len(lst)):
-    if second + lst[i] > first and first + second > lst[i] and first + lst[i] > second:
-        p = (first + second + lst[i]) / 2
-        s = (p*(p-first)*(p-second)*(p-lst[i])) ** 0.5
-        maximal = [first, second, lst[i]]
+    if lst[-1] + lst[i] > lst[-2] and lst[-2] + lst[-1] > lst[i] and lst[-2] + lst[i] > lst[-1]:
+        p = (lst[-2] + lst[-1] + lst[i]) / 2
+        s = (p*(p-lst[-2])*(p-lst[-1])*(p-lst[i])) ** 0.5
+        maximal['1'] = lst[-2]
+        maximal['2'] = lst[-1]
+        maximal['3'] = lst[i]
         break
 
-print("Максимальная площадь - ", s)
-print("Стороны при максимальной площади - ", maximal)
+if s > 0:
+    print("Максимальная площадь - ", s)
+    print("Стороны при максимальной площади - ", maximal)
+else:
+    print("К сожалению, операция не может быть выполнена :(")
