@@ -1,20 +1,20 @@
 lst = input('Введите числа')
-lst = list(lst.split(','))
-lst = [int(x) for x in lst]
-lst.sort(reverse=True)
-maximal = {'1': 0,'2': 0,'3': 0}
-s = 0
-p = 0
-for i in range(2, len(lst)):
-    if lst[-1] + lst[i] > lst[-2] and lst[-2] + lst[-1] > lst[i] and lst[-2] + lst[i] > lst[-1]:
+lst = list(lst.split(','))  # задаю ввод каждого числа через запятую
+lst = [int(x) for x in lst]  # ввожу неограниченное количество сторон
+lst.sort(reverse=True)  # сортирую список по убыванию
+maximal = {'1': 0,'2': 0,'3': 0}  # создаю словарь, в который добавлю все подходящие под условие задачи стороны
+s = 0  # площадь
+p = 0  # периметр
+for i in range(2, len(lst)):  # цикл, который начинается сразу с 3-й стороны
+    if lst[-1] + lst[i] > lst[-2] and lst[-2] + lst[-1] > lst[i] and lst[-2] + lst[i] > lst[-1]:  # создаю условие, которое проверяет, существует ли треугольник с данными сторонами
         p = (lst[-2] + lst[-1] + lst[i]) / 2
         s = (p*(p-lst[-2])*(p-lst[-1])*(p-lst[i])) ** 0.5
-        maximal['1'] = lst[-2]
-        maximal['2'] = lst[-1]
-        maximal['3'] = lst[i]
+        maximal['1'] = lst[-2]  # задаю 1 сторону треугольника
+        maximal['2'] = lst[-1]  # задаю 2 сторону треугольника
+        maximal['3'] = lst[i]  # задаю 3 сторону треугольника
         break
 
-if s > 0:
+if s > 0:  # проверяю, есть ли 2 такие стороны
     print("Максимальная площадь - ", s)
     print("Стороны при максимальной площади - ", maximal)
 else:
